@@ -24,6 +24,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -33,12 +34,13 @@ class TableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let userDefaults = UserDefaults.standard
-    
+        
         
         //"add"というキーで保存された値がなにかある -> 値をtaskArrayへ
         if userDefaults.object(forKey: "add") != nil {
             taskArray = userDefaults.object(forKey: "add") as! [String]
         }
+        
         
         //tableViewを更新
         tableView.reloadData()
@@ -88,10 +90,8 @@ class TableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             taskArray.remove(at: indexPath.row)
-            UserDefaults.standard.set(taskArray, forKey: "alert")
-            UserDefaults.standard.synchronize()
+            UserDefaults.standard.set(taskArray, forKey: "add")
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-        } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
